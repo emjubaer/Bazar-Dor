@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Header from "./components/Header";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,9 +23,21 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      data-theme="light"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="mx-auto max-w-7xl flex flex-col">
+        <Suspense fallback={<div>Loading...</div>}>
+          <Header/>
+        </Suspense>
+
+        {children}
+        
+        <footer className="py-6 text-center text-sm text-muted-foreground">
+          &copy; {new Date().getFullYear()} Bazar Dor. All rights reserved.
+        </footer>
+
+      </body>
     </html>
   );
 }
