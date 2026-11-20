@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ICategory } from '../types/categoryTypes';
 
@@ -21,7 +21,7 @@ const NavLinks = () => {
                 }
 
                 const data = await res.json();
-                setCategories(data.data);
+                setCategories(data);
             } catch (error) {
                 console.error(error);
             } finally {
