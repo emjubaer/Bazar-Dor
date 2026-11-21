@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import { Suspense } from "react";
 import { Toaster } from "react-hot-toast";
 import Marquee from "./components/Marquee";
+import HeroSection from "./components/HeroSection";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,12 +29,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-theme="light"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="mx-auto  flex flex-col">
+      <body className="mx-auto">
         <Suspense fallback={<div>Loading...</div>}>
           <Header />
         </Suspense>
         <Marquee />
-
+        <HeroSection />
         {children}
 
         <Toaster />
