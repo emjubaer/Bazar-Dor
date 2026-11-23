@@ -6,6 +6,9 @@ import { Suspense } from "react";
 import { Toaster } from "react-hot-toast";
 import Marquee from "./components/Marquee";
 import HeroSection from "./components/HeroSection";
+import RisingProduct from "./components/RisingProduct";
+import { ProductProvider } from "./context/ProductContext";
+import FallingProduct from "./components/FallingProduct";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,15 +33,19 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="mx-auto">
-        <Suspense fallback={<div>Loading...</div>}>
-          <Header />
-        </Suspense>
-        <Marquee />
-        <HeroSection />
-        {children}
+        <ProductProvider>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Header />
+          </Suspense>
+          <Marquee />
+          <HeroSection />
+          <RisingProduct />
+          <FallingProduct />;
+          {children}
 
-        <Toaster />
-        
+          <Toaster />
+        </ProductProvider>
+
         {/* <footer className="py-6 text-center text-sm text-muted-foreground">
           &copy; {new Date().getFullYear()} Bazar Dor. All rights reserved.
         </footer> */}
